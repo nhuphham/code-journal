@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Code Journal</title>
   <link rel="icon" href="images/favicon.ico">
   <link
@@ -22,27 +23,33 @@
     </div>
   </header>
   <div class="container">
+    <div data-view="entry-form">
+      <form id="form" action="/action_page.php">
+        <h2> New Entry </h2>
+        <div class="row">
+          <div class="column-half">
+            <img src="images/placeholder-image-square.jpg" alt="placeholder-image-square">
+          </div>
+          <div class="column-half">
 
-    <h2> New Entry </h2>
-    <div class="row">
-      <div class="column-half">
-        <img src="images/placeholder-image-square.jpg" alt="placeholder-image-square">
-      </div>
-      <div class="column-half">
-        <h3>Title</h3>
-        <input type="text" name="title" size="100" maxlength="30" />
-        <h3>Photo URL</h3>
-        <input type="text" name="photo" size="100" maxlength="30" />
-      </div>
-      <div class="column-full">
-        <h3>Notes</h3>
-        <textarea name="notes" cols="10" rows="10"> kms </textarea>
-        <div class="button">
-          <button type="button">SAVE</button>
+            <label for="title">Title</label>
+            <input type="text" name="title" size="100" required/>
+            <label for="photo"> Photo URL </label>
+            <input id="photoUrl" type="text" name="photo" size="100" required/>
+          </div>
+          <div class="column-full">
+            <label for="notes">Notes</label>
+            <textarea id="notes" name="notes" cols="10" rows="10" required> </textarea>
+            <div id="button">
+              <input type="submit" name="save" id="submit" value="SAVE">
+            </div>
+          </div>
         </div>
-      </div>
+      </form>
     </div>
   </div>
+  <div id="div1"></div>
+
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
 </body>
