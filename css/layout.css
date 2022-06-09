@@ -31,4 +31,17 @@
   .column-half {
     width: 50%;
   }
+
+  ul {
+    display: flex;
+    flex: wrap;
+    padding: none;
+  }
+
+  /*
+  .top-header {
+    width: 200px;
+    margin-left: 0%;
+  }
+} */
 }
