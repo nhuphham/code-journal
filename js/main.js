@@ -5,6 +5,7 @@ photoUrl.addEventListener('input', event => {
 });
 
 const form = document.querySelector('form');
+const placeholderForm = document.getElementById('placeholder-form');
 const entriesHTML = document.getElementById('entries');
 const entriesRaw = localStorage.getItem('entries');
 let entries = [];
@@ -66,10 +67,9 @@ function addEntry(entry) {
   descripLi.appendChild(h2);
   ul.appendChild(descripLi).appendChild(p);
   ul.setAttribute('data-entry-id', entry.entryId);
+  !placeholderForm.classList.contains('hidden') && placeholderForm.classList.add('hidden');
   return ul;
 }
-
-const placeholderForm = document.getElementById('placeholder-form');
 
 function addEntries() {
   const columnFull = document.getElementById('entry-root');
@@ -85,6 +85,13 @@ function addEntries() {
 
 window.addEventListener('DOMContentLoaded', event => {
   addEntries();
+  if (localStorage.getItem('entries') === null) {
+    localStorage.setItem('entries', JSON.stringify([]));
+    entries = [];
+  }
+  if (localStorage.getItem('editing') === null) {
+    localStorage.setItem('editing', 'null');
+  }
 });
 
 const newButton = document.getElementById('new');
@@ -140,10 +147,12 @@ cancelButton.addEventListener('click', event => {
 
 confirmButton.addEventListener('click', event => {
   const editingKey = localStorage.getItem('editing');
-  entries.splice(editingKey, 1);
+  const deleteMe = entries.findIndex(x => x.entryId === editingKey);
+  entries.splice(deleteMe, 1);
   localStorage.setItem('entries', JSON.stringify(entries));
   addEntries();
   resetForm();
+  localStorage.setItem('editing', null);
   !form.classList.contains('hidden') && form.classList.add('hidden');
   entriesHTML.classList.contains('hidden') && entriesHTML.classList.remove('hidden');
   !deleteButton.classList.contains('hidden') && deleteButton.classList.add('hidden');
